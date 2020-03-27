@@ -28,8 +28,8 @@ export default {
 
 body {
   margin: 0px;
-  max-width: 100vw;
-  overflow-x: hidden;
+  // max-width: 100vw;
+  // overflow-x: hidden;
 }
 
 html {

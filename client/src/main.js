@@ -17,13 +17,17 @@ import '@/assets/_global.scss';
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import { ToastPlugin } from 'bootstrap-vue'
-import { cookies } from 'vue-cookies';
+// import { cookies } from 'vue-cookies';
+
+import cookies from 'vue-cookies'
 
 import { BootstrapVue } from 'bootstrap-vue';
 import { BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 Vue.use(BootstrapVueIcons)
-Vue.use(BootstrapVue, ToastPlugin, cookies);
+Vue.use(BootstrapVue, ToastPlugin);
+Vue.use(cookies)
+
 
 
 
@@ -31,8 +35,8 @@ require('dotenv').config();
 Vue.config.productionTip = false;
 // console.log($cookies.get("user_token"));
 
-if($cookies.get("user_token")){
-  var decoded = jwtDecode($cookies.get("user_token"));
+if(cookies.get("user_token")){
+  var decoded = jwtDecode(cookies.get("user_token"));
   if(decoded.isAdmin){
     store.commit("admin", true);
   }

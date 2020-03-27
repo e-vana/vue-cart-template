@@ -3,19 +3,19 @@
 
   <div class="nav-container">
     <div class="brand">
-      {{ appName }}
+        {{ appName }}
     </div>
 
-    <div class="nav-search"> 
+    <!-- <div class="nav-search"> 
       <input type="text">
       <b-button variant="primary">Search</b-button>
-    </div>
+    </div> -->
 
     <!-- Main Navigation bar -->
     <div class="links"  v-if="this.windowWidth > this.menuCollapseWidth">
-      <router-link to="/"><b-button class="mr-2" variant="primary">Home</b-button></router-link>
+      <!-- <router-link to="/"><b-button class="mr-2" variant="primary">Home</b-button></router-link> -->
       <router-link v-if="$store.getters.loginState==false" to="/login"><b-button class="mr-2" variant="primary">Login</b-button></router-link>
-      <router-link v-if="$store.getters.loginState==false" to="/register"><b-button class="mr-2" variant="primary">Register</b-button></router-link>
+      <router-link v-if="$store.getters.loginState==false" to="/register"><b-button class="mr-2" variant="secondary">Register</b-button></router-link>
       <router-link v-if="$store.getters.loginState==true" to="/dashboard"><b-button class="mr-2" variant="primary">Dashboard</b-button></router-link>
       <router-link v-if="$store.getters.adminState==true" to="/admin"><b-button class="mr-2" variant="info">Admin</b-button></router-link>
       <b-button v-if="$store.getters.loginState==true" @click="signout" class="mr-2" variant="danger">Signout</b-button>
@@ -24,7 +24,7 @@
     <!-- Menu Toggle For Dropdown -->
     <div id="menu-btn-container" v-if="this.windowWidth < this.menuCollapseWidth" v-click-outside="closeDropDown" >
       <div id="menu-btn" @click="toggleMenuDropDown()">
-        <b-icon id="menu-btn-icon" class="h1" icon="grid-fill"></b-icon>
+        <b-icon id="menu-btn-icon" class="h1" icon="grid-fill" variant="primary"></b-icon>
       </div>
     </div>
     <!-- <b-btn @click="toggleMenuDropDown"></b-btn> -->
@@ -50,8 +50,7 @@
 
 <script>
 
-import clickOutside from '../directives/clickOutside.js'
-import axios from 'axios';
+// import clickOutside from '../directives/clickOutside.js'
 import {http} from '../util/axiosHttp.js'
 import cookies from 'vue-cookies';
 
@@ -66,7 +65,7 @@ export default {
       appName: process.env.VUE_APP_NAME,
       windowWidth: '',
       windowHeight: '',
-      menuCollapseWidth: 750,
+      menuCollapseWidth: 768,
       showDropDown: false
     }
   },
@@ -118,9 +117,20 @@ export default {
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  padding: 15px;
+  padding: 20px 40px;
   z-index: 50;
   position:relative;
+}
+
+.nav-container button {
+  padding: 10px 40px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.brand {
+  font-size: 24px;
+  letter-spacing: 5px;
 }
 
 .nav-search {
@@ -156,8 +166,10 @@ export default {
   padding: 8px;
 }
 
+
+
 #menu-btn-icon {
-  color: #007bff;
+  /* color: #007bff; */
   transition: .1s ease-in-out;
   margin-bottom: -3px;
 }
