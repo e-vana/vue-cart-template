@@ -15,6 +15,7 @@ html {
   border-radius: 5px;
   /* background-image: url('../assets/moon-bg.png'); */
   background-size: cover;
+  padding: 40px;
 }
 input {
   width: 100%;
@@ -72,9 +73,19 @@ input {
   .column {
     flex: 1;
   }
+  .form-card {
+    padding: 20px;
+  }
+  .hero-container {
+    padding: 40px;
+  }
+  .hero-img {
+    margin-top: 40px;
+  }
 }
 
-@media screen and (max-width: 870px) {
+/* @media screen and (max-width: 870px) { */
+@media screen and (max-width: 980px){
   .column {
     flex: 1;
     min-width: 300px;

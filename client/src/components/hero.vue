@@ -35,7 +35,8 @@ export default {
 .hero-container {
   /* background-color: blue; */
   width: 100%;
-  padding: 40px;
+  padding: 80px;
+  /* background-color: rgb(247, 247, 247); */
 }
 
 .hero-text {

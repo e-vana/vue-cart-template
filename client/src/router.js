@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store.js'
 import Home from './views/Home.vue'
+import ItemPage from './views/ItemPage.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import PasswordReset from './views/PasswordReset.vue'
@@ -28,6 +29,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/product/:itemId',
+      name: 'itemPage',
+      component: ItemPage
     },
     {
       path: '/login',

@@ -15,7 +15,17 @@ export default {
   name: "ItemCard",
   data(){
     return{
-      
+      item: [
+        {
+          itemName: "Tea Kettle",
+          itemPrice: 19.99,
+          itemId: "1a2a3a4a",
+          // itemPictureUrl: "../assets/kettle.jpg",
+          itemPictureUrl: require('@/assets/kettle.jpg'),
+          itemDescription: "This is a small black tea kettle.",
+          itemRating: 4
+        },
+      ]
     }
   },
   props: {
