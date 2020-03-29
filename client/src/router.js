@@ -31,7 +31,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/product/:itemId',
+      path: '/product/:id',
       name: 'itemPage',
       component: ItemPage
     },

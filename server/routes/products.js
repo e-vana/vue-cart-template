@@ -30,6 +30,14 @@ router.get('/', catchErrors(async (req, res) => {
     throw { message: "No featured products found."}
   }
 }));
+router.get('/:id', catchErrors(async (req, res) => {
+  var product = await Product.find({ _id: req.params.id });
+  if(product){
+    res.send(product);
+  } else {
+    throw { message: "No product found."}
+  }
+}));
 
 
 router.get('/featured-products', catchErrors(async (req, res) => {
