@@ -2,13 +2,13 @@
   <div v-if="!isLoading">
     <div class="row">
       <div class="column">
-        <!-- <ItemCard
+        <ItemCard
           :itemName="item.itemName"
           :itemPrice="item.itemPrice"
           :itemId="item.itemId"
           :itemPictureUrl="item.itemPictureUrl"
           :itemDescription="item.itemDescription"
-        /> -->
+        />
         <ItemCard v-bind="item"/>
         </div>
       <div class="column"></div>

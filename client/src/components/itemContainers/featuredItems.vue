@@ -51,17 +51,14 @@ export default {
       return 5 - this.items[index].itemRating;
     },
     firstItems() {
-      return this.items.slice(0, 4)
-    },
-    nextItems() {
-      return this.items.slice(2, 4)
+      return this.items.slice(0, 4);
     },
   },
   created: async function(){
     try {
       this.isLoading = true;
       var featuredItems = await http().get(`${process.env.VUE_APP_API_URL}/api/products/featured-products`);
-      console.log(featuredItems);
+      // console.log(featuredItems);
       if(featuredItems){
         this.isLoading = false;
         this.items = featuredItems.data;

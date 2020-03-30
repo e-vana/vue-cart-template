@@ -54,15 +54,12 @@ export default {
     firstItems() {
       return this.items.slice(0, 4)
     },
-    nextItems() {
-      return this.items.slice(2, 4)
-    },
   },
   created: async function(){
     try {
       this.isLoading = true;
       var newItems = await http().get(`${process.env.VUE_APP_API_URL}/api/products/new-products`);
-      console.log(newItems);
+      // console.log(newItems);
       if(newItems){
         this.isLoading = false;
         this.items = newItems.data;
