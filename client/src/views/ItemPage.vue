@@ -18,23 +18,39 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste animi accusamus minus, doloribus dolor excepturi aspernatur ab. Repudiandae iste fugit autem deleniti! Optio dolor aspernatur, omnis, laboriosam voluptas voluptatem placeat necessitatibus est iste nostrum in commodi nisi, ipsum consequatur beatae?</p>
 
             <h5>${{ item.itemPrice }}</h5>
-
             <b-button variant="primary">Add to Cart</b-button>
           </div>
         </div>
       </b-col>
     </b-row>
     <b-row>
-      <b-col md="12" class="p-0" v-if="hasReviews" >
+      <b-col md="12" class="p-0">
+      <!-- <b-col md="12" class="p-0" v-if="hasReviews" > -->
         <div class="form-card p-5">
         <h2>Reviews</h2>
         <hr>
+        <b-row v-for="review in reviews" :key="review.index" class="mb-2">
+          <b-col>
+            <b-icon icon="person-fill"></b-icon>
+            {{ review.reviewerName }}
+            <br>
+            <b-icon v-for="rating in review.reviewRating" :key="rating.index" icon="star-fill"></b-icon>
+            <b-icon v-for="n in 5 - review.reviewRating" :key="n.index" icon="star"></b-icon>
+            <p>{{ review.reviewText }}</p>
+            <hr>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <p>Want to add a review for this product?</p>
+              <b-button variant="secondary">Add Review</b-button>
+          </b-col>
+        </b-row>
 
         </div>
       </b-col>
     </b-row>
     </div>
-
 
 
   </div>
@@ -61,11 +77,18 @@ export default {
     try {
       this.isLoading = true;
       var getItem = await http().get(`${process.env.VUE_APP_API_URL}/api/products/${this.$route.params.id}`);
+
+      var getReviews = await http().get(`${process.env.VUE_APP_API_URL}/api/reviews/${this.$route.params.id}`);
+
       if(getItem){
         console.log(getItem);
         this.item = getItem.data[0];
-        this.isLoading = false;
       }
+      if(getReviews){
+        console.log(getReviews);
+        this.reviews = getReviews.data;
+      }
+      this.isLoading = false;
     }catch (err){
       console.log(err);
       this.isLoading = false;

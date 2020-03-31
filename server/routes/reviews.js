@@ -37,7 +37,7 @@ router.get('/', catchErrors(async (req, res) => {
 
 // Get reviews for a particular product
 router.get('/:id', catchErrors(async (req, res) => {
-  var review = await Review.find({ _id: req.params.id });
+  var review = await Review.find({ reviewFor: req.params.id });
   if(review){
     res.send(review);
   } else {
