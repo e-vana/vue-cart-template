@@ -71,6 +71,7 @@ router.post('/', catchErrors(async (req, res) => {
     itemName: req.body.itemName,
     itemPrice: req.body.itemPrice,
     itemPictureUrl: req.body.itemPictureUrl,
+    itemPictureUrlLarge: req.body.itemPictureUrlLarge,
     itemDescription: req.body.itemDescription,
     featured: req.body.featured,
     dateAdded: Date.now()

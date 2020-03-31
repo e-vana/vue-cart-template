@@ -13,6 +13,10 @@ let productSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  itemPictureUrlLarge: {
+    type: String,
+    required: true
+  },
   itemDescription: {
     type: String,
     required: true

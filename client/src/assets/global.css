@@ -1,6 +1,7 @@
 html {
   --primary-color: #e20a75;
   --dark-bg: #e4e4e4;
+  --light-bg: #f7f7f7;
 }
 .ar {
   text-align: right;

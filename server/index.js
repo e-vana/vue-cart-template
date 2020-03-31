@@ -19,6 +19,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/account', require('./routes/accountManagement'));
 app.use('/api/support', require('./routes/customerSupport'));
 app.use('/api/products', require('./routes/products'));
+app.use('/api/reviews', require('./routes/reviews'));
 
 
 

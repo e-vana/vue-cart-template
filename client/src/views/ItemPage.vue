@@ -1,18 +1,42 @@
 <template>
   <div v-if="!isLoading">
-    <div class="row">
-      <div class="column">
-        <ItemCard
-          :itemName="item.itemName"
-          :itemPrice="item.itemPrice"
-          :itemId="item.itemId"
-          :itemPictureUrl="item.itemPictureUrl"
-          :itemDescription="item.itemDescription"
-        />
-        <ItemCard v-bind="item"/>
+    <div class="container">
+
+    <b-row>
+      <b-col md="6" cols="12" class="product-img-container p-0">
+        <img :src="item.itemPictureUrlLarge" alt="">
+      </b-col>
+      <b-col md="6" cols="12" class="p-0">
+        <div class="text-container p-5">
+          <div>
+            <h2>{{ item.itemName }}</h2>
+            <div class="mb-2">
+              <b-icon v-for="rating in item.itemRating" :key="rating.index" icon="star-fill"></b-icon>
+              <b-icon v-for="n in 5 - item.itemRating" :key="n.index" icon="star"></b-icon>
+            </div>
+            <!-- <p>{{ item.itemDescription }}</p> -->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste animi accusamus minus, doloribus dolor excepturi aspernatur ab. Repudiandae iste fugit autem deleniti! Optio dolor aspernatur, omnis, laboriosam voluptas voluptatem placeat necessitatibus est iste nostrum in commodi nisi, ipsum consequatur beatae?</p>
+
+            <h5>${{ item.itemPrice }}</h5>
+
+            <b-button variant="primary">Add to Cart</b-button>
+          </div>
         </div>
-      <div class="column"></div>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col md="12" class="p-0" v-if="hasReviews" >
+        <div class="form-card p-5">
+        <h2>Reviews</h2>
+        <hr>
+
+        </div>
+      </b-col>
+    </b-row>
     </div>
+
+
+
   </div>
 </template>
 
@@ -29,6 +53,7 @@ export default {
   data(){
     return{
       item: [],
+      reviews: [],
       isLoading: false,
     }
   },
@@ -40,7 +65,6 @@ export default {
         console.log(getItem);
         this.item = getItem.data[0];
         this.isLoading = false;
-
       }
     }catch (err){
       console.log(err);
@@ -49,14 +73,43 @@ export default {
     }
   },
   computed: {
-    // item(){
-    //   console.log(this.items[0]);
-    //   return this.items[0]
-    // }
+    hasReviews(){
+      if(this.reviews.length > 0){
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }
 </script>
 
 <style>
+
+.container {
+  margin: 40px 200px;
+}
+
+.product-img-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  max-height: 600px;
+
+}
+.text-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: var(--light-bg);
+}
+
+@media screen and (max-width: 768px) {
+  .text-container {
+    margin-top: 20px;
+  }
+  
+}
 
 </style>
