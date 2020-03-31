@@ -2,6 +2,8 @@
 
 This application will eventually be a mock storefront utilizing VueJs and Express.  Eventual plans involve adding items to carts, a mock checkout flow using Stripe, and adding administrative tools to add and remove items from the store front.  It's built on top of another application of mine, Vue-Login-Template-Public.
 
+![header-img](https://i.imgur.com/Q7P3X3A.png)
+
 ## Getting Started
 
 Download the repository and unpack.  There are two primary folders, the 'Client' folder and the 'Server' folder which are the front end and back end, respectively.  
