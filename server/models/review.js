@@ -19,11 +19,6 @@ let reviewSchema = mongoose.Schema({
     required: true,
     default: 0
   },
-  numberOfRatings: {
-    type: Number,
-    required: true,
-    default: 0
-  },
   dateAdded: {
     type: Date,
     required: true

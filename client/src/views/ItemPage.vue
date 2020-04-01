@@ -29,7 +29,7 @@
         <div class="form-card p-5">
         <h2>Reviews</h2>
         <hr>
-        <b-row v-for="review in reviews" :key="review.index" class="mb-2">
+        <b-row v-for="review in limitReviews" :key="review.index" class="mb-2">
           <b-col>
             <b-icon icon="person-fill"></b-icon>
             {{ review.reviewerName }}
@@ -40,12 +40,30 @@
             <hr>
           </b-col>
         </b-row>
+
+        <b-row>
+          <b-col>
+            <!-- <a class="show-more-reviews" @click="incrementReviews">Show more reviews</a> -->
+            <b-button :disabled="noMoreReviews" class="show-more-reviews" @click="incrementReviews" variant="primary">
+              <div v-if="!noMoreReviews">
+                Show More Reviews
+              </div>
+              <div v-if="noMoreReviews">
+                There are currently no more reviews to show.
+              </div>
+            </b-button >
+
+          </b-col>
+        </b-row>
+        <hr>
+
         <b-row v-if="!submittedAlready">
           <b-col>
-            <p v-if="!showAddReview">Want to add a review for this product?</p>
-            <b-button v-if="!showAddReview" @click="toggleReview" variant="secondary">Add Review</b-button>
+            <!-- <h3 v-if="!showAddReview">Want to add a review to this product?</h3> -->
+
+            <b-button v-if="!showAddReview" @click="toggleReview" class="show-more-reviews" variant="secondary">Add a review for this product</b-button>
+            <h3 v-if="showAddReview">Add a review for this product</h3>
             <div v-if="showAddReview">
-              <h3>Add a review for this product</h3>
               <b-form @submit.prevent>
                 <b-form-group label-for="name-input" label="Your Name">
                   <b-input class="mb-3" v-model="reviewerName" id="name-input"></b-input>
@@ -115,11 +133,16 @@ export default {
         }
       ],
       submittedAlready: false,
+      howManyReviews: 5,
+      noMoreReviews: false
     }
   },
   methods: {
     toggleReview(){
       this.showAddReview = !this.showAddReview;
+    },
+    incrementReviews(){
+      this.howManyReviews += 5;
     },
     submitReview: async function(){
       try {
@@ -152,18 +175,18 @@ export default {
       }
     },
     refetchReviews: async function(){
-    try {
-      var getReviews = await http().get(`${process.env.VUE_APP_API_URL}/api/reviews/${this.$route.params.id}`);
+      try {
+        var getReviews = await http().get(`${process.env.VUE_APP_API_URL}/api/reviews/${this.$route.params.id}`);
 
-      if(getReviews){
-        console.log(getReviews);
-        this.reviews = getReviews.data;
+        if(getReviews){
+          console.log(getReviews);
+          this.reviews = getReviews.data;
+        }
+        this.isLoading = false;
+      }catch (err){
+        console.log(err);
+        this.isLoading = false;
       }
-      this.isLoading = false;
-    }catch (err){
-      console.log(err);
-      this.isLoading = false;
-    }
     }
   },
   created: async function(){
@@ -194,16 +217,36 @@ export default {
       } else {
         return false;
       }
+    },
+    limitReviews(){
+      var showReviews = this.howManyReviews;
+      var sliceTo = this.reviews.length;
+
+      if(showReviews > this.reviews.length){
+        sliceTo = this.reviews.length;
+        this.noMoreReviews = true;
+      } else {
+        sliceTo = showReviews;
+      }
+      var arr = this.reviews.slice(0, sliceTo);
+      return arr;
     }
   }
 }
 </script>
 
 <style>
-
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 .container {
   margin: 40px 200px;
 }
+
+
 
 .product-img-container img {
   object-fit: cover;
@@ -218,6 +261,13 @@ export default {
   align-items: center;
   height: 100%;
   background-color: var(--light-bg);
+}
+
+.show-more-reviews  {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

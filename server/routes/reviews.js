@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 // const Product = require("../models/product");
 const Review = require("../models/review");
+const Product = require("../models/product");
+
 
 const tokenBlacklist = require("../models/tokenBlacklist");
 const jwt = require('jsonwebtoken');
@@ -55,9 +57,33 @@ router.post('/', catchErrors(async (req, res) => {
     dateAdded: Date.now()
   });
 
-  var save = await newReview.save();
-  if(save){
-    res.send(save);
+  if(req.body.reviewRating > 5 || req.body.reviewRating < 0){
+    throw {message: "Rating must be between 0 and 5."}
+  }
+
+  var saveNewReview = await newReview.save();
+
+  //update reviewAverage
+  var getReviews = await Review.find({ reviewFor: req.body.reviewFor});
+  var sumRating = 0;
+
+  for(i=0; i < getReviews.length; i++){
+    sumRating = sumRating + getReviews[i].reviewRating;
+  }
+  var averageRating = Math.round(sumRating / getReviews.length);
+
+  //find product being reviewed and update new average
+  var fetchProduct = await Product.findOne({ _id: req.body.reviewFor });
+  if(!fetchProduct){
+    throw { message: `Error updating ${req.body.reviewFor} review score.`}
+  }
+  fetchProduct.itemRating = averageRating;
+  fetchProduct.save();
+
+
+
+  if(saveNewReview){
+    res.send(saveNewReview);
   }else {
     throw { message: "Error saving new review."}
   }
