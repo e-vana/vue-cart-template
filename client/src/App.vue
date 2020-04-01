@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="my-bg-dark">
     <Navbar></Navbar>
+    <b-progress class="loaderPos" v-if="this.$store.getters.isLoading" :value="this.$store.getters.getLoadingPercent" :max="100" animated></b-progress>
+
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
@@ -13,11 +15,11 @@ import Navbar from '@/components/Navbar'
 export default {
   components: {
     Navbar
-  }
+  },
 }
 </script>
 
-<style lang="scss">
+<style>
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s;
@@ -28,8 +30,6 @@ export default {
 
 body {
   margin: 0px;
-  // max-width: 100vw;
-  // overflow-x: hidden;
 }
 
 html {
@@ -37,19 +37,14 @@ html {
 }
 #app {
   font-family: 'Oxygen', sans-serif;
-  // font-family: 'Beth Ellen', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.loaderPos {
+  z-index: 50;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 </style>

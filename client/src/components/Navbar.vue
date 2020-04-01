@@ -2,9 +2,11 @@
 <div>
 
   <div class="nav-container">
+    <router-link to="/">
     <div class="brand">
         {{ appName }}
     </div>
+    </router-link>
 
     <!-- <div class="nav-search"> 
       <input type="text">
@@ -14,8 +16,8 @@
     <!-- Main Navigation bar -->
     <div class="links"  v-if="this.windowWidth > this.menuCollapseWidth">
       <!-- <router-link to="/"><b-button class="mr-2" variant="primary">Home</b-button></router-link> -->
-      <router-link v-if="$store.getters.loginState==false" to="/login"><b-button class="mr-2" variant="primary">Login</b-button></router-link>
-      <router-link v-if="$store.getters.loginState==false" to="/register"><b-button class="mr-2" variant="secondary">Register</b-button></router-link>
+      <!-- <router-link v-if="$store.getters.loginState==false" to="/login"><b-button class="mr-2" variant="primary">Login</b-button></router-link> -->
+      <!-- <router-link v-if="$store.getters.loginState==false" to="/register"><b-button class="mr-2" variant="secondary">Register</b-button></router-link> -->
       <router-link v-if="$store.getters.loginState==true" to="/dashboard"><b-button class="mr-2" variant="primary">Dashboard</b-button></router-link>
       <router-link v-if="$store.getters.adminState==true" to="/admin"><b-button class="mr-2" variant="info">Admin</b-button></router-link>
       <b-button v-if="$store.getters.loginState==true" @click="signout" class="mr-2" variant="danger">Signout</b-button>

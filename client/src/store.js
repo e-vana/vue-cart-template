@@ -8,7 +8,9 @@ export default new Vuex.Store({
     isLoggedIn: false,
     token: '',
     isAdmin: false,
-    currentUser: ''
+    currentUser: '',
+    isLoading: false,
+    loadingPercent: 0
   },
   mutations: {
     login: (state) => {
@@ -25,6 +27,12 @@ export default new Vuex.Store({
     },
     setUser: (state, payload) => {
       state.currentUser = payload;
+    },
+    setLoading: (state, payload) => {
+      state.isLoading = payload;
+    },
+    setLoadingPercent: (state, payload) => {
+      state.loadingPercent = payload;
     }
   },
   actions: {
@@ -42,6 +50,12 @@ export default new Vuex.Store({
     },
     getUser: state => {
       return state.currentUser;
+    },
+    isLoading: state => {
+      return state.isLoading;
+    },
+    getLoadingPercent: state => {
+      return state.loadingPercent;
     }
   }
 })
