@@ -8,20 +8,17 @@
     </div>
     </router-link>
 
-    <!-- <div class="nav-search"> 
-      <input type="text">
-      <b-button variant="primary">Search</b-button>
-    </div> -->
 
     <!-- Main Navigation bar -->
     <div class="links"  v-if="this.windowWidth > this.menuCollapseWidth">
-      <router-link to="/cart">
-        <b-button variant="primary">
-          Cart <b-badge style="font-size: 12px;" variant="light">{{ this.$store.getters.getCartLength }}</b-badge>
-        </b-button>
-      </router-link>
+      <b-button :style="this.cartEmpty ? {'visibility': 'hidden'} : {'visibility': 'inherit'}" v-b-modal.modal-1 variant="primary">
+        Cart ( {{ this.$store.getters.itemsInCart }} )
+      </b-button>
 
-      <!-- <router-link to="/"><b-button class="mr-2" variant="primary">Home</b-button></router-link> -->
+      <b-modal id="modal-1" title="Cart" ok-only ok-title="Checkout">
+        <CartModalContent/>
+      </b-modal>
+
       <!-- <router-link v-if="$store.getters.loginState==false" to="/login"><b-button class="mr-2" variant="primary">Login</b-button></router-link> -->
       <!-- <router-link v-if="$store.getters.loginState==false" to="/register"><b-button class="mr-2" variant="secondary">Register</b-button></router-link> -->
       <router-link v-if="$store.getters.loginState==true" to="/dashboard"><b-button class="mr-2" variant="primary">Dashboard</b-button></router-link>
@@ -58,15 +55,17 @@
 
 <script>
 
-// import clickOutside from '../directives/clickOutside.js'
+import clickOutside from '../directives/clickOutside.js'
 import {http} from '../util/axiosHttp.js'
 import cookies from 'vue-cookies';
+import CartModalContent from '@/components/cartModalContent'
 
 
 
 export default {
   name: 'Navbar',
   components: {
+    CartModalContent
   },
   data() {
     return {
@@ -109,13 +108,23 @@ export default {
     },
     closeDropDown(){
       this.showDropDown = false;
-    },
+    }
   },
   created(){
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
     window.addEventListener("resize", this.resizeHandler);
   },
+  computed: {
+    cartEmpty(){
+      if(this.$store.getters.getCartLength < 1){
+        return true;
+      }else {
+        return false;
+
+      }
+    }
+  }
 }
 </script>
 <style>
@@ -140,6 +149,8 @@ export default {
   font-size: 24px;
   letter-spacing: 5px;
 }
+
+
 
 .nav-search {
   width: 500px;

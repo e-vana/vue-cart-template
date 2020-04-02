@@ -36,7 +36,21 @@ export default new Vuex.Store({
       state.loadingPercent = payload;
     },
     pushToCart: (state, payload) => {
-      state.cart.push(payload);
+      var inArr = false;
+      state.cart.forEach(element => {
+        if(payload.itemName == element.itemName){
+          inArr = true;
+          element.quantity += 1;
+        }else {
+          inArr = false;
+        }
+      })
+      if(!inArr){
+        state.cart.push(payload)
+      }
+    },
+    modifyCartQuantity: (state, payload, index) => {
+      state.cart[index].quantity = payload;
     },
     removeFromCart: (state, index) => {
       state.cart.splice(index, 1);
@@ -69,6 +83,13 @@ export default new Vuex.Store({
     },
     getCartLength: state => {
       return state.cart.length;
+    },
+    itemsInCart: state => {
+      var count = 0;
+      state.cart.forEach((element) => {
+        count += element.quantity;
+      });
+      return count;
     }
   }
 })

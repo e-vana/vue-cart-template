@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import store from './store.js'
 import Home from './views/Home.vue'
 import ItemPage from './views/ItemPage.vue'
-import Cart from './views/Cart.vue'
 
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
@@ -36,11 +35,6 @@ export default new Router({
       path: '/product/:id',
       name: 'itemPage',
       component: ItemPage
-    },
-    {
-      path: '/cart',
-      name: 'cart',
-      component: Cart
     },
     {
       path: '/login',
