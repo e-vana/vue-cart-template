@@ -8,9 +8,9 @@
 
  
 <script>
-import FeaturedItems from '../components/itemContainers/featuredItems'
-import NewItems from '../components/itemContainers/newItems'
-import Hero from '../components/hero'
+import FeaturedItems from '../components/itemContainers/FeaturedItems'
+import NewItems from '../components/itemContainers/NewItems'
+import Hero from '../components/Hero'
 
 export default {
   name: 'home',

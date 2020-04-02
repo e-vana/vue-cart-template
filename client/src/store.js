@@ -37,23 +37,32 @@ export default new Vuex.Store({
     },
     pushToCart: (state, payload) => {
       var inArr = false;
+      
       state.cart.forEach(element => {
         if(payload.itemName == element.itemName){
           inArr = true;
           element.quantity += 1;
+
         }else {
           inArr = false;
         }
       })
       if(!inArr){
+        payload.quantity = 1;
         state.cart.push(payload)
       }
     },
-    modifyCartQuantity: (state, payload, index) => {
-      state.cart[index].quantity = payload;
+    updateQuantity: (state, payload) => {
+      // console.log(payload);
+      // console.log(state.cart[payload.index].quantity)
+      state.cart[payload.index].quantity = payload.itemQuantity;
+
+      // state.cart[index].quantity = payload;
+      // console.log(state.cart[index].payload)
     },
-    removeFromCart: (state, index) => {
-      state.cart.splice(index, 1);
+    removeFromCart: (state, payload) => {
+      state.cart[payload.index].quantity = 0;
+      state.cart.splice(payload.index, 1);
     }
   },
   actions: {
@@ -85,11 +94,11 @@ export default new Vuex.Store({
       return state.cart.length;
     },
     itemsInCart: state => {
-      var count = 0;
+      var counter = 0;
       state.cart.forEach((element) => {
-        count += element.quantity;
-      });
-      return count;
-    }
+        counter = counter + (1 * element.quantity);
+      })
+      return counter;
+    },
   }
 })

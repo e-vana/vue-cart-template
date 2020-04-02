@@ -39,7 +39,7 @@
 import {http} from '../../util/axiosHttp.js'
 
 export default {
-  name: 'featuredItems',
+  name: 'FeaturedItems',
   data(){
     return{
       items: [],

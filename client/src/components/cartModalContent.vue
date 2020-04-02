@@ -3,32 +3,14 @@
   <div v-if="cartEmpty">
     <p>There are no items in the cart at this time.</p>
   </div>
-    <div v-for="(item, index) in this.$store.getters.getCart" class="mb-4" :key="index">
-    <b-toast id="example-toast" title="BootstrapVue" static no-auto-hide>
-      Removed Item from toast
-    </b-toast>
-    <b-row class="cart-item-container">
-      <b-col>
-        <div class="cart-item-img">
-          <img :src="item.itemPictureUrl"  alt="">
-        </div>
-      </b-col>
+    <!-- <div v-for="(item, index) in cartItems" class="mb-4" :key="index">
+      <CartItem v-bind="item" />
+    </div> -->
 
-      <b-col>{{ item.itemName }}</b-col>
-      <b-col>${{ item.itemPrice }}</b-col>
-      <!-- <b-col>Quantity: {{ item.quantity }}</b-col> -->
-      <b-col>
-        <!-- Quantity: {{ item.quantity }} -->
-        Quantity:
-        <input type="number" name="" id="" :placeholder="item.quantity" :value="item.quantity">
-        {{ quantityVal }}
-      </b-col>
+    <div v-for="(item, index) in cartItems" :key="index">
+      <CartItem v-bind="item" :index="index"/>
+    </div>
 
-
-
-      <b-col><b-icon @click="removeCart(index)" icon="x" style="width: 25px; height: 25px;"></b-icon></b-col>
-    </b-row>
-  </div>
   <div v-if="!cartEmpty" style="text-align: right;">
     <hr>
     Item Total: ${{ cartTotal }} +
@@ -41,15 +23,18 @@
 </div>
 
 </template>
-
 <script>
+import CartItem from './CartItem'
+
 export default {
-  name: "cartModalContent",
+  name: "CartModalContent",
+  components: {
+    CartItem
+  },
   data(){
     return{
       toastCount: 0,
       shippingCost: 9.99,
-      quantityVal: 0,
     }
   },
   methods: {
@@ -68,8 +53,8 @@ export default {
 
   },
   computed: {
-    quantityUpdate(){
-
+    cartItems(){
+      return this.$store.getters.getCart;
     },
     cartEmpty(){
       if(this.$store.getters.getCartLength < 1){

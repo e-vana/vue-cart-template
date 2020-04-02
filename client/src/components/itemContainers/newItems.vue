@@ -40,7 +40,7 @@ import {http} from '../../util/axiosHttp.js'
 
 
 export default {
-  name: 'newItems',
+  name: 'NewItems',
   data(){
     return{
       items: [],
