@@ -15,6 +15,12 @@
 
     <!-- Main Navigation bar -->
     <div class="links"  v-if="this.windowWidth > this.menuCollapseWidth">
+      <router-link to="/cart">
+        <b-button variant="primary">
+          Cart <b-badge style="font-size: 12px;" variant="light">{{ this.$store.getters.getCartLength }}</b-badge>
+        </b-button>
+      </router-link>
+
       <!-- <router-link to="/"><b-button class="mr-2" variant="primary">Home</b-button></router-link> -->
       <!-- <router-link v-if="$store.getters.loginState==false" to="/login"><b-button class="mr-2" variant="primary">Login</b-button></router-link> -->
       <!-- <router-link v-if="$store.getters.loginState==false" to="/register"><b-button class="mr-2" variant="secondary">Register</b-button></router-link> -->
@@ -68,7 +74,7 @@ export default {
       windowWidth: '',
       windowHeight: '',
       menuCollapseWidth: 768,
-      showDropDown: false
+      showDropDown: false,
     }
   },
   methods: {
@@ -120,7 +126,7 @@ export default {
   align-items: center;
   background-color: white;
   padding: 20px 40px;
-  z-index: 50;
+  z-index: 35;
   position:relative;
 }
 

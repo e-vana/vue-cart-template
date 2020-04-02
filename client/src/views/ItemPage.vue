@@ -18,7 +18,10 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste animi accusamus minus, doloribus dolor excepturi aspernatur ab. Repudiandae iste fugit autem deleniti! Optio dolor aspernatur, omnis, laboriosam voluptas voluptatem placeat necessitatibus est iste nostrum in commodi nisi, ipsum consequatur beatae?</p>
 
             <h5>${{ item.itemPrice }}</h5>
-            <b-button variant="primary">Add to Cart</b-button>
+            <b-button @click="addToCart" variant="primary">Add to Cart</b-button>
+            
+
+
           </div>
         </div>
       </b-col>
@@ -44,7 +47,7 @@
         <b-row>
           <b-col>
             <!-- <a class="show-more-reviews" @click="incrementReviews">Show more reviews</a> -->
-            <b-button :disabled="noMoreReviews" class="show-more-reviews" @click="incrementReviews" variant="primary">
+            <b-button class="show-more-reviews" @click="incrementReviews" variant="primary">
               <div v-if="!noMoreReviews">
                 Show More Reviews
               </div>
@@ -143,6 +146,10 @@ export default {
     },
     incrementReviews(){
       this.howManyReviews += 5;
+    },
+    addToCart(){
+      var item = this.item;
+      this.$store.commit("pushToCart", item)
     },
     submitReview: async function(){
       try {

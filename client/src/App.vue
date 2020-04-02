@@ -47,4 +47,15 @@ html {
   top: 0;
   width: 100%;
 }
+.cartClicked {
+  z-index: 40;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.904);
+}
+.cart-card {
+  margin: 200px;
+}
 </style>

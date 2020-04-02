@@ -18,6 +18,11 @@ html {
   background-size: cover;
   padding: 40px;
 }
+
+.container {
+  margin: 40px 200px;
+}
+
 input {
   width: 100%;
   box-sizing: border-box;

@@ -10,7 +10,8 @@ export default new Vuex.Store({
     isAdmin: false,
     currentUser: '',
     isLoading: false,
-    loadingPercent: 0
+    loadingPercent: 0,
+    cart: []
   },
   mutations: {
     login: (state) => {
@@ -33,6 +34,12 @@ export default new Vuex.Store({
     },
     setLoadingPercent: (state, payload) => {
       state.loadingPercent = payload;
+    },
+    pushToCart: (state, payload) => {
+      state.cart.push(payload);
+    },
+    removeFromCart: (state, index) => {
+      state.cart.splice(index, 1);
     }
   },
   actions: {
@@ -56,6 +63,12 @@ export default new Vuex.Store({
     },
     getLoadingPercent: state => {
       return state.loadingPercent;
+    },
+    getCart: state => {
+      return state.cart;
+    },
+    getCartLength: state => {
+      return state.cart.length;
     }
   }
 })
