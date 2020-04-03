@@ -10,7 +10,9 @@
 
 
     <!-- Main Navigation bar -->
-    <div class="links"  v-if="this.windowWidth > this.menuCollapseWidth">
+    <!-- <div class="links"  v-if="this.windowWidth > this.menuCollapseWidth"> -->
+    <div class="links">
+
       <b-button :style="this.cartEmpty ? {'visibility': 'hidden'} : {'visibility': 'inherit'}" v-b-modal.modal-1 variant="primary">
         Cart ( {{ this.$store.getters.itemsInCart }} )
       </b-button>
