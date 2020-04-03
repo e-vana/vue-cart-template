@@ -1,35 +1,34 @@
-!<template>
-<div>
-  <div v-if="cartEmpty">
-    <p>There are no items in the cart at this time.</p>
+<template>
+  <div>
+    <b-modal id="modal-1" title="Cart" hide-footer>
+      <div v-if="cartEmpty">
+        <p>There are no items in the cart at this time.</p>
+      </div>
+
+      <div v-for="(item, index) in cartItems" :key="index">
+        <CartItem v-bind="item" :index="index"/>
+      </div>
+
+      <div v-if="!cartEmpty" style="text-align: right;">
+        <hr>
+        Item Total: ${{ displayItemTotal }}
+        <br>
+        Shipping Cost: ${{ this.shippingCost}}
+        <br>
+        Estimated Tax: ${{ displayTax}}
+        <hr>
+        <b>Your Total: ${{ cartFinalTotal.toFixed(2) }}</b>
+      </div>
+      <b-button v-if="this.$store.getters.getCartLength > 0" style="width: 100%;" class="mt-3">Checkout</b-button>
+    </b-modal>
   </div>
-    <!-- <div v-for="(item, index) in cartItems" class="mb-4" :key="index">
-      <CartItem v-bind="item" />
-    </div> -->
-
-    <div v-for="(item, index) in cartItems" :key="index">
-      <CartItem v-bind="item" :index="index"/>
-    </div>
-
-  <div v-if="!cartEmpty" style="text-align: right;">
-    <hr>
-
-    Item Total: ${{ displayItemTotal }}
-    <br>
-    Shipping Cost: ${{ this.shippingCost}}
-    <br>
-    Estimated Tax: ${{ displayTax}}
-    <hr>
-    <b>Your Total: ${{ cartFinalTotal.toFixed(2) }}</b>
-  </div>
-</div>
-
 </template>
+
 <script>
 import CartItem from './CartItem'
 
 export default {
-  name: "CartModalContent",
+  name: "CartModal",
   components: {
     CartItem
   },

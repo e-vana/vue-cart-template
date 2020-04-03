@@ -2,7 +2,6 @@
   <div id="app" class="my-bg-dark">
     <Navbar></Navbar>
     <b-progress class="loaderPos" v-if="this.$store.getters.isLoading" :value="this.$store.getters.getLoadingPercent" :max="100" animated></b-progress>
-
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>

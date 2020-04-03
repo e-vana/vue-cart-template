@@ -14,10 +14,10 @@
       <b-button :style="this.cartEmpty ? {'visibility': 'hidden'} : {'visibility': 'inherit'}" v-b-modal.modal-1 variant="primary">
         Cart ( {{ this.$store.getters.itemsInCart }} )
       </b-button>
-
-      <b-modal id="modal-1" title="Cart" ok-only ok-title="Checkout">
+      <CartModal/>
+      <!-- <b-modal id="modal-1" title="Cart" ok-only ok-title="Checkout">
         <CartModalContent/>
-      </b-modal>
+      </b-modal> -->
 
       <!-- <router-link v-if="$store.getters.loginState==false" to="/login"><b-button class="mr-2" variant="primary">Login</b-button></router-link> -->
       <!-- <router-link v-if="$store.getters.loginState==false" to="/register"><b-button class="mr-2" variant="secondary">Register</b-button></router-link> -->
@@ -58,14 +58,15 @@
 import clickOutside from '../directives/clickOutside.js'
 import {http} from '../util/axiosHttp.js'
 import cookies from 'vue-cookies';
-import CartModalContent from '@/components/CartModalContent'
+// import CartModalContent from '@/components/CartModalContent'
+import CartModal from '@/components/CartModal'
 
 
 
 export default {
   name: 'Navbar',
   components: {
-    CartModalContent
+    CartModal
   },
   data() {
     return {

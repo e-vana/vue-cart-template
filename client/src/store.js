@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {roundTo} from './util/Math'
-
+import cookies from 'vue-cookies'
 
 Vue.use(Vuex)
 
@@ -52,19 +51,23 @@ export default new Vuex.Store({
       if(!inArr){
         payload.quantity = 1;
         state.cart.push(payload)
+        // cookies.set("user_cart", state.cart);
+
       }
     },
     updateQuantity: (state, payload) => {
-      // console.log(payload);
-      // console.log(state.cart[payload.index].quantity)
       state.cart[payload.index].quantity = payload.itemQuantity;
+      // cookies.set("user_cart", state.cart);
 
-      // state.cart[index].quantity = payload;
-      // console.log(state.cart[index].payload)
     },
     removeFromCart: (state, payload) => {
       state.cart[payload.index].quantity = 0;
       state.cart.splice(payload.index, 1);
+      // cookies.set("user_cart", state.cart);
+
+    },
+    setCart: (state, payload) => {
+      state.cart = payload;
     }
   },
   actions: {

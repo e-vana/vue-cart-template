@@ -35,6 +35,10 @@ require('dotenv').config();
 Vue.config.productionTip = false;
 // console.log($cookies.get("user_token"));
 
+// if(cookies.get("user_cart")){
+//   store.commit("setCart", cookies.get("user_cart"))
+// }
+
 if(cookies.get("user_token")){
   var decoded = jwtDecode(cookies.get("user_token"));
   if(decoded.isAdmin){
