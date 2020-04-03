@@ -19,7 +19,7 @@
     <b-row v-if="showEditQuantity">
       <b-col>
         How many of this item do you want?
-        <input type="number" min="0" max="10" v-model.number="itemQuantity" @change="updateQuantity()">
+        <input type="number" min="0" max="10" :placeholder="quantity" v-model.number="itemQuantity" @change="updateQuantity()">
       </b-col>
     </b-row>
     
@@ -31,7 +31,7 @@ export default {
   name: 'cartItem',
   data(){
     return {
-      itemQuantity: 1,
+      itemQuantity: this.quantity,
       showEditQuantity: false
     }
   },

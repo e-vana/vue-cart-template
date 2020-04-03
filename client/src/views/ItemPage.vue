@@ -14,7 +14,6 @@
               <b-icon v-for="rating in item.itemRating" :key="rating.index" icon="star-fill"></b-icon>
               <b-icon v-for="n in 5 - item.itemRating" :key="n.index" icon="star"></b-icon>
             </div>
-            <!-- <p>{{ item.itemDescription }}</p> -->
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste animi accusamus minus, doloribus dolor excepturi aspernatur ab. Repudiandae iste fugit autem deleniti! Optio dolor aspernatur, omnis, laboriosam voluptas voluptatem placeat necessitatibus est iste nostrum in commodi nisi, ipsum consequatur beatae?</p>
 
             <h5>${{ item.itemPrice }}</h5>
@@ -62,8 +61,6 @@
 
         <b-row v-if="!submittedAlready">
           <b-col>
-            <!-- <h3 v-if="!showAddReview">Want to add a review to this product?</h3> -->
-
             <b-button v-if="!showAddReview" @click="toggleReview" class="show-more-reviews" variant="secondary">Add a review for this product</b-button>
             <h3 v-if="showAddReview">Add a review for this product</h3>
             <div v-if="showAddReview">

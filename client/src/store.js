@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {roundTo} from './util/Math'
+
 
 Vue.use(Vuex)
 
@@ -100,5 +102,15 @@ export default new Vuex.Store({
       })
       return counter;
     },
+    getCartTotal: state => {
+      var total = 0.00;
+      state.cart.forEach(element => {
+        // total = (element.quantity * element.itemPrice) + total;
+        // total = ((element.quantity).toFixed(2)*element.itemPrice.toFixed(2)) + total;
+
+        total = (element.quantity * element.itemPrice) + total;
+      })
+      return total;
+    }
   }
 })

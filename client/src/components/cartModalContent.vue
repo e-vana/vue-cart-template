@@ -13,12 +13,14 @@
 
   <div v-if="!cartEmpty" style="text-align: right;">
     <hr>
-    Item Total: ${{ cartTotal }} +
+
+    Item Total: ${{ this.$store.getters.getCartTotal }}
     <br>
-    Shipping & Handling: ${{ shippingCost }}
+    Shipping Cost: ${{ this.shippingCost}}
     <br>
+    Estimated Tax: ${{ this.$store.getters.getCartTotal * this.taxRate}}
     <hr>
-    <b>Total: ${{ finalTotal }}</b>
+    <b>Your Total: ${{ cartFinalTotal }}</b>
   </div>
 </div>
 
@@ -35,6 +37,7 @@ export default {
     return{
       toastCount: 0,
       shippingCost: 9.99,
+      taxRate: 0.07,
     }
   },
   methods: {
@@ -63,22 +66,8 @@ export default {
         return false;
       }
     },
-    cartTotal: function(){
-      var total = 0;
-      var i;
-      var cart = this.$store.getters.getCart;
-
-      for(i=0; i < cart.length; i++){
-        if(cart[i].quantity){
-          total = cart[i].itemPrice * cart[i].quantity + total;
-        } else {
-          total = cart[i].itemPrice + total;
-        }
-      }
-      return total;
-    },
-    finalTotal: function(){
-      return this.cartTotal + this.shippingCost;
+    cartFinalTotal() {
+      return this.shippingCost + this.$store.getters.getCartTotal;
     }
   }
 }

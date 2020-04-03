@@ -58,7 +58,7 @@
 import clickOutside from '../directives/clickOutside.js'
 import {http} from '../util/axiosHttp.js'
 import cookies from 'vue-cookies';
-import CartModalContent from '@/components/cartModalContent'
+import CartModalContent from '@/components/CartModalContent'
 
 
 
