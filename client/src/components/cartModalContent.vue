@@ -14,13 +14,13 @@
   <div v-if="!cartEmpty" style="text-align: right;">
     <hr>
 
-    Item Total: ${{ this.$store.getters.getCartTotal }}
+    Item Total: ${{ displayItemTotal }}
     <br>
     Shipping Cost: ${{ this.shippingCost}}
     <br>
-    Estimated Tax: ${{ this.$store.getters.getCartTotal * this.taxRate}}
+    Estimated Tax: ${{ displayTax}}
     <hr>
-    <b>Your Total: ${{ cartFinalTotal }}</b>
+    <b>Your Total: ${{ cartFinalTotal.toFixed(2) }}</b>
   </div>
 </div>
 
@@ -65,6 +65,12 @@ export default {
       }else {
         return false;
       }
+    },
+    displayTax(){
+      return (this.taxRate * this.$store.getters.getCartTotal).toFixed(2);
+    },
+    displayItemTotal(){
+      return (this.$store.getters.getCartTotal).toFixed(2);
     },
     cartFinalTotal() {
       return this.shippingCost + this.$store.getters.getCartTotal;
