@@ -78,7 +78,7 @@ router.post('/', catchErrors(async (req, res) => {
     throw { message: `Error updating ${req.body.reviewFor} review score.`}
   }
   fetchProduct.itemRating = averageRating;
-  fetchProduct.save();
+  var saveProduct = await fetchProduct.save();
 
 
 

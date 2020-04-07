@@ -25,12 +25,13 @@
         </div>
       </b-col>
     </b-row>
-    <b-row>
+    <b-row >
       <b-col md="12" class="p-0">
       <!-- <b-col md="12" class="p-0" v-if="hasReviews" > -->
         <div class="form-card p-5">
-        <h2>Reviews</h2>
+        <h2 >Reviews</h2>
         <hr>
+        <p v-if="reviews.length == 0">This item has no reviews yet.  Be the first one to review this product!</p>
         <b-row v-for="review in limitReviews" :key="review.index" class="mb-2">
           <b-col>
             <b-icon icon="person-fill"></b-icon>
@@ -39,24 +40,23 @@
             <b-icon v-for="rating in review.reviewRating" :key="rating.index" icon="star-fill"></b-icon>
             <b-icon v-for="n in 5 - review.reviewRating" :key="n.index" icon="star"></b-icon>
             <p>{{ review.reviewText }}</p>
-            <hr>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col>
             <!-- <a class="show-more-reviews" @click="incrementReviews">Show more reviews</a> -->
-            <b-button class="show-more-reviews" @click="incrementReviews" variant="primary">
-              <div v-if="!noMoreReviews">
+
+            <b-button v-if="reviews.length > 0 && !noMoreReviews" class="show-more-reviews" @click="incrementReviews" variant="primary" >
+              <div >
                 Show More Reviews
               </div>
-              <div v-if="noMoreReviews">
-                There are currently no more reviews to show.
-              </div>
+
             </b-button >
 
           </b-col>
         </b-row>
+
         <hr>
 
         <b-row v-if="!submittedAlready">
@@ -64,13 +64,13 @@
             <b-button v-if="!showAddReview" @click="toggleReview" class="show-more-reviews" variant="secondary">Add a review for this product</b-button>
             <h3 v-if="showAddReview">Add a review for this product</h3>
             <div v-if="showAddReview">
-              <b-form @submit.prevent>
+              <b-form @submit.prevent @submit="submitReview">
                 <b-form-group label-for="name-input" label="Your Name">
-                  <b-input class="mb-3" v-model="reviewerName" id="name-input"></b-input>
+                  <b-input class="mb-3" v-model="reviewerName" id="name-input" required></b-input>
                 </b-form-group>
 
-                <b-form-group label-for="review-input" label="Your Review">
-                  <b-form-textarea class="mb-3" v-model="reviewText" id="review-input"></b-form-textarea>
+                <b-form-group label-for="review-input" label="Your Review" required>
+                  <b-form-textarea class="mb-3" v-model="reviewText" id="review-input" required></b-form-textarea>
                 </b-form-group>
 
                 <b-form-group  label="What do you rate this product? (Where 5 is the best rating and 0 is the worst).">
@@ -134,7 +134,8 @@ export default {
       ],
       submittedAlready: false,
       howManyReviews: 5,
-      noMoreReviews: false
+      noMoreReviews: false,
+      reviewsEmpty: true
     }
   },
   methods: {
@@ -208,6 +209,7 @@ export default {
         console.log(getReviews);
         this.reviews = getReviews.data;
       }
+
       this.isLoading = false;
     }catch (err){
       console.log(err);
@@ -256,8 +258,10 @@ export default {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  max-width: 600px;
-  max-height: 600px;
+  border: inset 40px white;
+  border-style: solid;
+  /* max-width: 600px; */
+  /* max-height: 600px; */
 
 }
 .text-container {
@@ -280,5 +284,11 @@ export default {
   }
   
 }
+@media screen and (max-width: 768px){
+  .container { 
+    max-width: 900px !important;
+  }
+}
+
 
 </style>

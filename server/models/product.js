@@ -15,7 +15,8 @@ let productSchema = mongoose.Schema({
   },
   itemPictureUrlLarge: {
     type: String,
-    required: true
+    required: true,
+    default: ''
   },
   itemDescription: {
     type: String,
